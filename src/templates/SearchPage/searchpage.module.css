@@ -111,4 +111,7 @@
     .resultsItem {
         width: 100%;
     }
+    .searchpageFieldWrap {
+        top: 25%;
+    }
 }
