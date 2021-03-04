@@ -12,14 +12,6 @@ export const createReqParams = (url, params = new FormData(), method = 'post', c
             cancelToken: cancelToken
         };
     }
-    /*
-        var headers = {
-            'Access-Control-Allow-Origin': '*',
-            'crossDomain': true,
-            Authorization: 'Token fe2fddfbe1380a4c294429643af7ca7626abf302',
-        }
-        axiosParams.headers = headers;
-    */
     if(method.toLowerCase() === 'get'){
         axiosParams.params = params;
     }
