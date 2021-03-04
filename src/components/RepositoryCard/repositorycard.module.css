@@ -4,6 +4,7 @@
     border: 1px solid #CCCCCC;
     transition: 0.25s;
     width: 100%;
+    background: #F3F3F3;
 }
 .card {
     display: flex;
@@ -27,15 +28,18 @@
     /*cursor: pointer;*/
 }
 .cardButtonPrimary {
-    /*transform: translate(10px, 0);*/
-    border: none;
-    box-shadow: none;
-    font-family: inherit;
-    background-color: transparent;
-    color: #585858;
-    font-size: 15px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 10px;
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: uppercase;
     transition: 0.25s;
-    margin-top: 7px;
+    margin-top: 15px;
     display: inline-block;
 }
 
@@ -44,7 +48,7 @@
     align-items: center;
     width: 100%;
     padding: 15px;
-    background-color: #ccc;
+    background-color: #dcdcdc;
     background-size: cover;
     color: #fff;
 }
@@ -54,6 +58,7 @@
     display: inline-block;
     height: 60px;
     width: 60px;
+    min-width: 60px;
     background-color: #eeeeee;
     background-size: cover;
     margin-right: 15px;
@@ -72,7 +77,6 @@
 
 .cardBody {
     padding: 15px;
-    background-color: #fff;
     width: 100%;
 }
 

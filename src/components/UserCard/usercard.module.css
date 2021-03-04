@@ -1,0 +1,178 @@
+.userCard {
+    background: #FFFFFF;
+    display: block;
+    margin: 30px auto 0;
+    transition: 0.25s;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+.cardContent {
+    /*position: absolute;*/
+    top: 100%;
+    width: 100%;
+    /*padding: 0;*/
+    padding: 15px;
+    /*max-height: 0px;*/
+    /*overflow: hidden;*/
+    /*transition: .5s;*/
+}
+.card {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+.card:hover .userCard{
+    /*transform: translateY(-15px);*/
+}
+
+.cardHeader {
+    border: 1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    background-color: #dcdcdc;
+    background-size: cover;
+}
+
+.cardHeaderContent{
+    width: calc( 100% - 105px );
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.userAvatarImage {
+    border: 1px solid #CCCCCC;
+    text-decoration: none;
+    display: inline-block;
+    height: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    background-color: #eeeeee;
+    background-size: cover;
+    margin-right: 15px;
+}
+
+.cardHeaderTitle {
+    text-transform: uppercase;
+    margin: 0;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardDate {
+    margin-bottom: 7px;
+    display: flex;
+    width: 100%;
+}
+
+.cardHeaderTitleAnchor {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardHeaderBtn {
+    cursor: pointer;
+    background: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 10px;
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.cardContentUsername {
+    margin: 0 0 7px;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.cardContentUsername .badge {
+    display: inline-block;
+    background: #FCD000;
+    border-radius: 2px;
+    margin: 0 10px 0;
+    padding: 4px;
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+.cardContentBio {
+    color: #666666;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+.cardLoadMoreContent{
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+.cardLoadMoreContent.cardLoadMoreContentActive {
+    max-height: 350px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-top: 0;
+    z-index: 3;
+}
+.cardFooter {
+    text-align: center;
+    border: 1px solid #CCCCCC;
+    border: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+    background: #F3F3F3;
+    padding: 7px 15px;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+.cardFooterInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.code {
+    background: rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    border-radius: 2px;
+    margin: 40px auto 100px;
+}
+.code:before {
+    content: 'HTML Code';
+    display: block;
+    padding: 20px 20px 0;
+    color: #333333;
+    font-weight: 600;
+}

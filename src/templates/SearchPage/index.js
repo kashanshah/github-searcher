@@ -16,7 +16,7 @@ class SearchPage extends React.Component {
     state = {
         items: [],
         page: 1,
-        query: '',
+        query: 'kashan',
         per_page: 30,
         total_count: 0,
         show_total: false,
@@ -98,9 +98,6 @@ class SearchPage extends React.Component {
         }
     }, 500);
 
-    refreshData = e => {
-    }
-
     resetResults = e => {
         this.setState({
             page: 1,
@@ -112,11 +109,14 @@ class SearchPage extends React.Component {
 
     showLoading = () => {
         return (
-                <div className={"c_row"}>
-                    <div className={styles.resultsItem}>
-                        <LoadingCard /></div><div className={styles.resultsItem}><LoadingCard />
-                    </div>
+            <div className={"c_row"}>
+                <div className={styles.resultsItem}>
+                    <LoadingCard />
                 </div>
+                <div className={styles.resultsItem}>
+                    <LoadingCard />
+                </div>
+            </div>
         )
     }
 
@@ -200,7 +200,11 @@ class SearchPage extends React.Component {
                                         this.state.items ? this.state.items.map((e, index) => {
                                             switch (this.state.searchType.value) {
                                                 case "users":
-                                                    return <div className={styles.resultsItem}><UserCard key={e.id+index} /></div>
+                                                    return (
+                                                        <div className={styles.resultsItem} key={e.id+index}>
+                                                            <UserCard data={e} />
+                                                        </div>
+                                                    )
                                                 case "repositories":
                                                     return (
                                                         <div className={styles.resultsItem} key={e.id+index}>

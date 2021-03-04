@@ -1,5 +1,6 @@
 .searchpage {
     position: relative;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -97,4 +98,10 @@
 }
 .totalCountSpan {
     font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .resultsItem {
+        width: 50%;
+    }
 }
