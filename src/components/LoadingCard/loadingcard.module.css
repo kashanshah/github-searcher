@@ -1,0 +1,54 @@
+.repositoryCard {
+    display: block;
+    margin: 30px auto;
+    border: 1px solid #CCCCCC;
+    transition: 0.25s;
+    width: 100%;
+    -webkit-animation-duration: 1.25s;
+    animation-duration: 1.25s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #F6F6F6;
+    background: linear-gradient(260deg, rgba(246,246,246,1) 8%, rgba(240,240,240,1) 18%, rgba(246,246,246,1) 33%);
+    height: 300px;
+}
+.cardHeader {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    color: #fff;
+}
+
+.repoAvatarImage {
+    height: 60px;
+    width: 60px;
+    background-color: #eeeeee;
+    background-size: cover;
+    margin-right: 15px;
+}
+
+@-webkit-keyframes placeHolderShimmer {
+    0% {
+        background-position: -300px 0;
+    }
+    100% {
+        background-position: 300px 0;
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -300px 0;
+    }
+    100% {
+        background-position: 300px 0;
+    }
+}
