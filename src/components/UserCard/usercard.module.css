@@ -23,11 +23,6 @@
     height: 100%;
 }
 
-
-.card:hover .userCard{
-    /*transform: translateY(-15px);*/
-}
-
 .cardHeader {
     border: 1px solid #CCCCCC;
     display: flex;

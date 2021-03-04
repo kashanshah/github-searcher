@@ -16,7 +16,7 @@ class SearchPage extends React.Component {
     state = {
         items: [],
         page: 1,
-        query: 'kashan',
+        query: '',
         per_page: 30,
         total_count: 0,
         show_total: false,
@@ -222,7 +222,9 @@ class SearchPage extends React.Component {
                             </InfiniteScroll>
                             :
                             ''}
+{/*
                     <span onClick={this.props.flushSearchResults}>Empty Cached Results</span>
+*/}
                 </div>
             </>
         )
