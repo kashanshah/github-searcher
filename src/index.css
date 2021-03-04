@@ -25,7 +25,6 @@ h1, h2, h3, h4, h5, h6, p{
   padding-right: 15px;
 }
 
-
 .c_row {
   display: flex;
   flex-direction: row;
@@ -40,4 +39,19 @@ h1, h2, h3, h4, h5, h6, p{
 .c_col {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.infinite-scroll-component {
+  padding-top: 30px;
+}
+
+@media (max-width: 576px) {
+  .c_container {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .c_col {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
 }

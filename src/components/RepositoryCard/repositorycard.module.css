@@ -1,6 +1,6 @@
 .repositoryCard {
     display: block;
-    margin: 30px auto;
+    margin: 0 auto 30px;
     border: 1px solid #CCCCCC;
     transition: 0.25s;
     width: 100%;

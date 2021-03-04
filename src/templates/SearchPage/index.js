@@ -177,7 +177,7 @@ class SearchPage extends React.Component {
                 <div className={styles.searchResults + " c_container"}>
                     <div className={styles.totalCount + " c_row"}>
                         <div className="c_col">
-                            {this.state.show_total ? <>Total Results: <span className={styles.totalCountSpan}>{this.state.total_count && this.state.total_count}</span></> : <span>&nbsp;</span> }
+                            {this.state.show_total ? <>Total Results: <span className={styles.totalCountSpan}>{this.state.total_count && this.state.total_count}</span></> : '' }
                         </div>
                     </div>
                     {this.props.isLoading ?
@@ -190,9 +190,9 @@ class SearchPage extends React.Component {
                                 hasMore={(this.state.items.length < this.state.total_count)}
                                 loader={this.showLoading()}
                                 endMessage={
-                                    <p style={{ textAlign: 'center' }}>
-                                        <b>Yay! You have seen it all</b>
-                                    </p>
+                                    <div style={{ padding: '30px 0', textAlign: 'center' }}>
+                                        <b>That's all!</b>
+                                    </div>
                                 }
                             >
                                 <div className={"c_row"}>
