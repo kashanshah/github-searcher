@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# `Coding Task:` [Github Searcher](https://test.kashanshah.com)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+
+Github Searcher is a simple single page application built with [React JS](https://reactjs.org).
+
+The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+The project's is also deployed at this link for viewing purpose: [test.kashanshah.com](https://test.kashanshah.com)
+
+The project is using [React Router](https://github.com/ReactTraining/react-router) for routings. The application has only 2 routes:
+1. `/`: Default route 
+1. `/search`: Search Page route 
+
+On search page, there are two inputs, i.e. search field, to enter the search keyword; and the dropdown where user can pick "User", "Repository" or "Issues" to define the entities that he want to search.
+
+When a user types 3 or more characters, based on the Entity type dropdown value, the search results are fetched from [github API](https://docs.github.com/en/rest/reference/search) and displayed to the user. **30 results** per hit has been rendered, with **infinite scrolling** untill all the results are displayed.
+
+For easily making the API calls, [axios](https://www.npmjs.com/package/axios) has been used which is wrapped in a custom developed function `createReqParams` in [functions.js](./src/common/functions.js#L4). To avoid the unnecessary API calls, [debouncing is also implemented](src/templates/SearchPage/index.js#L35) using [lodash](https://lodash.com/). In case a search api call is in the queue, [the new API call cancels the previous call](./src/templates/SearchPage/index.js#L41) and then makes a new one.
+
+For dropdown, [React Select](https://react-select.com/) has been used. While for infinite scrolling, [React Infinite Scroll Component](https://www.npmjs.com/package/react-infinite-scroll-component) has been used.
+
+The first 30 results against each searched keyword are also stored in redux store, through [redux-persist](https://www.npmjs.com/package/redux-persist). The cached results are flushed when the default route `/` is mounted. 
+
+Before calling the API, the [application first checks](./src/templates/SearchPage/index.js#L53) the redux store for the results against the typed keyword. If the result is present, the application checks if the cached data is not older than an hour. If the data is not an hour older, it displays the data from redux store, otherwise a new API call is executed to get refreshed data.
 
 ## Available Scripts
 
@@ -9,62 +31,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
