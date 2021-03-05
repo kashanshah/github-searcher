@@ -19,8 +19,8 @@ export const CommonReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 searchResults: {
                     ...state.searchResults,
-                    [action.payload.searchType]: {
-                        ...state.searchResults[action.payload.searchType],
+                    [action.payload.entityType]: {
+                        ...state.searchResults[action.payload.entityType],
                         ...action.payload.searchResults
                     }
                 },

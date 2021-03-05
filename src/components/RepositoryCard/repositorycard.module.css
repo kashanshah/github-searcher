@@ -1,6 +1,6 @@
 .repositoryCard {
     display: block;
-    margin: 0 auto 30px;
+    margin: 15px auto;
     border: 1px solid #CCCCCC;
     transition: 0.25s;
     width: 100%;
@@ -18,8 +18,6 @@
     font-size: 13px;
     line-height: 1.8;
     padding-bottom: 30px;
-    /*overflow: hidden;*/
-    /*max-height: 0;*/
 }
 
 .cardHeader {

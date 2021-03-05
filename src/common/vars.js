@@ -1,6 +1,6 @@
 export const API_BASE_URL = 'https://api.github.com';
 export const SEARCH_URL = API_BASE_URL + '/search';
-export const SEARCH_TYPES = [
+export const ENTITY_TYPES = [
     {value: 'users', label: 'Users'},
     {value: 'repositories', label: 'Repositories'},
     {value: 'issues', label: 'Issues'}

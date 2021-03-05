@@ -1,21 +1,15 @@
 .issueCard {
     background: #FFFFFF;
     display: block;
-    margin: 30px auto 0;
+    margin: 15px auto;
     transition: 0.25s;
     width: 100%;
     position: relative;
     z-index: 2;
 }
 .cardContent {
-    /*position: absolute;*/
     top: 100%;
     width: 100%;
-    /*padding: 0;*/
-    /*padding: 15px;*/
-    /*max-height: 0px;*/
-    /*overflow: hidden;*/
-    /*transition: .5s;*/
 }
 .card {
     display: flex;
@@ -41,7 +35,7 @@
     align-items: flex-start;
 }
 
-.userAvatarImage {
+.issueAvatarImage {
     border: 1px solid #CCCCCC;
     text-decoration: none;
     display: inline-block;
@@ -77,7 +71,7 @@
 }
 
 .commentCount {
-    padding: 4px 15px;
+    padding: 4px 0 4px 15px;
 }
 
 .commentCount svg {
@@ -185,4 +179,12 @@
     padding: 20px 20px 0;
     color: #333333;
     font-weight: 600;
+}
+@media (max-width: 576px) {
+    .issueAvatarImage {
+        display: none;
+    }
+    .cardHeaderContent {
+        width: 100%;
+    }
 }

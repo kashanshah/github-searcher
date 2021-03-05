@@ -24,13 +24,13 @@ export const displayMessage = (data) => {
     }
 };
 
-export const addSearchResults = (searchResults, searchType = 'users') => {
+export const addSearchResults = (searchResults, entityType = 'users') => {
     return (dispatch) => {
         dispatch({
             type: ADD_SEARCH_RESULTS,
             payload: {
                 searchResults,
-                searchType,
+                entityType,
             }
         });
     }

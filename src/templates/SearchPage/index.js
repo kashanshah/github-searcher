@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import _ from "lodash";
-import {createReqParams, isAnHourAgo, notify, SEARCH_TYPES, SEARCH_URL} from "../../common";
+import {createReqParams, isAnHourAgo, notify, ENTITY_TYPES, SEARCH_URL} from "../../common";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from "./searchpage.module.css";
 import axios from "axios";
@@ -22,7 +22,7 @@ class SearchPage extends React.Component {
         per_page: 30,
         total_count: 0,
         show_total: false,
-        searchType: SEARCH_TYPES[0]
+        entityType: ENTITY_TYPES[0]
     }
 
     componentDidMount() {
@@ -47,14 +47,14 @@ class SearchPage extends React.Component {
                 this.props.switchLoading(true);
             }
             const q = this.state.query;
-            const searchType = this.state.searchType.value;
+            const entityType = this.state.entityType.value;
             const per_page = this.state.per_page;
             const page = this.state.page;
-            if(this.state.page === 1 && this.props.searchResults[searchType] && this.props.searchResults[searchType][q] && !isAnHourAgo(this.props.searchResults[searchType][q].searchedAt)){
+            if(this.state.page === 1 && this.props.searchResults[entityType] && this.props.searchResults[entityType][q] && !isAnHourAgo(this.props.searchResults[entityType][q].searchedAt)){
                 this.setState({
                     page: this.state.page + 1,
-                    items: this.props.searchResults[searchType][q].items,
-                    total_count: this.props.searchResults[searchType][q].total_count,
+                    items: this.props.searchResults[entityType][q].items,
+                    total_count: this.props.searchResults[entityType][q].total_count,
                     show_total: true
                 });
                 this.props.switchLoading(false);
@@ -63,7 +63,7 @@ class SearchPage extends React.Component {
                 this.setState({
                     show_total: false
                 });
-                createReqParams(SEARCH_URL + '/' + searchType, {q: q, page: page, per_page: per_page}, 'GET', this.cancelToken.token)
+                createReqParams(SEARCH_URL + '/' + entityType, {q: q, page: page, per_page: per_page}, 'GET', this.cancelToken.token)
                     .then(response => {
                         if(response && response.data){
                             const data = response.data;
@@ -75,7 +75,7 @@ class SearchPage extends React.Component {
                                     }
                                 };
                                 if(this.state.page === 1) {
-                                    this.props.addSearchResults(searchResult, searchType);
+                                    this.props.addSearchResults(searchResult, entityType);
                                 }
                                 this.setState({
                                     page: this.state.page + 1,
@@ -147,15 +147,15 @@ class SearchPage extends React.Component {
                             />
                             <Select
                                 className={styles.searchboxSelect}
-                                name="searchType"
-                                id="searchType"
+                                name="entityType"
+                                id="entityType"
                                 styles
-                                options={SEARCH_TYPES}
-                                value={this.state.searchType}
+                                options={ENTITY_TYPES}
+                                value={this.state.entityType}
                                 onChange={e => {
                                     this.resetResults();
                                     this.setState({
-                                        searchType: e
+                                        entityType: e
                                     });
                                     if(this.state.query.length >= 3){
                                         this.props.switchLoading(true);
@@ -187,10 +187,10 @@ class SearchPage extends React.Component {
                                     </div>
                                 }
                             >
-                                <div className={"c_row " + (this.state.searchType.value === 'issues' ? styles.issueSearchRow : '')}>
+                                <div className={"c_row " + (this.state.entityType.value === 'issues' ? styles.issueSearchRow : '')}>
                                     {
                                         this.state.items ? this.state.items.map((e, index) => {
-                                            switch (this.state.searchType.value) {
+                                            switch (this.state.entityType.value) {
                                                 case "users":
                                                     return (
                                                         <div className={styles.resultsItem} key={e.id+index}>

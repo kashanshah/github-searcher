@@ -1,21 +1,16 @@
 .userCard {
     background: #FFFFFF;
     display: block;
-    margin: 15px auto 0;
+    margin: 15px auto;
     transition: 0.25s;
     width: 100%;
     position: relative;
     z-index: 2;
 }
 .cardContent {
-    /*position: absolute;*/
     top: 100%;
     width: 100%;
-    /*padding: 0;*/
     padding: 15px;
-    /*max-height: 0px;*/
-    /*overflow: hidden;*/
-    /*transition: .5s;*/
 }
 .card {
     display: flex;

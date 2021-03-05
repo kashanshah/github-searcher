@@ -9,7 +9,7 @@ function CardHeader (props) {
     };
     return (
         <header className={styles.cardHeader}>
-            <a href={(data.user.html_url) || '#'} target={"_blank"} rel={"noreferrer"} className={styles.userAvatarImage} style={{
+            <a href={(data.user.html_url) || '#'} target={"_blank"} rel={"noreferrer"} className={styles.issueAvatarImage} style={{
                 ...style,
                 fontSize: 0}}>{data.login || ''}</a>
             <div className={styles.cardHeaderContent}>
