@@ -30,7 +30,7 @@ export const addSearchResults = (searchResults, searchType = 'users') => {
             type: ADD_SEARCH_RESULTS,
             payload: {
                 searchResults,
-                searchType
+                searchType,
             }
         });
     }

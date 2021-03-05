@@ -1,6 +1,7 @@
 import styles from "./repositorycard.module.css";
 import colors from "./colors.json";
 import {formatDate} from "../../common";
+import Button from "../Button";
 
 function CardHeader (props) {
     var style = {
@@ -59,7 +60,9 @@ function CardBody (props) {
                     :
                     ''
             }
-            <a href={props.link} target={"_blank"} rel={"noreferrer"} className={styles.cardButtonPrimary} >Find out more</a>
+            <Button>
+                <a href={props.link} target={"_blank"} rel={"noreferrer"}>Find out more</a>
+            </Button>
         </div>
     )
 }
@@ -67,10 +70,10 @@ function CardBody (props) {
 function RepositoryCard (props) {
     return (
         <div className={styles.card}>
-            <article className={styles.repositoryCard}>
+            <div className={styles.repositoryCard}>
                 <CardHeader owner={props.data.owner} full_name={props.data.full_name} pushed_at={props.data.pushed_at} />
                 <CardBody title={props.data.name} link={props.data.html_url} text={props.data.description} forks_count={props.data.forks_count} stars={props.data.stargazers_count} language={props.data.language} languages_url={props.data.languages_url} updated_at={props.data.updated_at}/>
-            </article>
+            </div>
         </div>
     )
 }

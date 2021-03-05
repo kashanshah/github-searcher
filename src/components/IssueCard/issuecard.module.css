@@ -1,7 +1,7 @@
-.userCard {
+.issueCard {
     background: #FFFFFF;
     display: block;
-    margin: 15px auto 0;
+    margin: 30px auto 0;
     transition: 0.25s;
     width: 100%;
     position: relative;
@@ -12,7 +12,7 @@
     top: 100%;
     width: 100%;
     /*padding: 0;*/
-    padding: 15px;
+    /*padding: 15px;*/
     /*max-height: 0px;*/
     /*overflow: hidden;*/
     /*transition: .5s;*/
@@ -26,7 +26,7 @@
 .cardHeader {
     border: 1px solid #CCCCCC;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
     padding: 15px;
@@ -55,29 +55,57 @@
 
 .cardHeaderTitle {
     text-transform: uppercase;
-    margin: 0;
+    margin: 0 0 7px;
     color: #000;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     display: flex;
     width: 100%;
 }
 
-.cardDate {
+.issueState {
+    color: #FFFFFF;
     margin-bottom: 7px;
-    display: flex;
-    width: 100%;
+    border-radius: 16px;
+    display: inline-block;
+    padding: 5px 15px;
+    line-height: 1;
+}
+
+.issueState svg {
+    margin-right: 7px;
+    position: relative;
+    top: 2px;
+}
+
+.commentCount {
+    padding: 4px 15px;
+}
+
+.commentCount svg {
+    margin-right: 7px;
+    position: relative;
+    top: 2px;
 }
 
 .cardHeaderTitleAnchor {
     color: inherit;
     text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
+.cardHeaderBtn {
+    cursor: pointer;
+    background: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 10px;
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 15px 0 0;
+    display: inline-block;
+}
 .cardContentUsername {
     margin: 0 0 7px;
     color: #333333;
@@ -137,13 +165,13 @@
     color: #333333;
     font-size: 14px;
     font-weight: 600;
-    text-align: center;
 }
 .cardFooterInfo {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
 }
 .code {
     background: rgba(0, 0, 0, 0.1);

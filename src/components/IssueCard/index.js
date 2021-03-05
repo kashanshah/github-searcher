@@ -1,33 +1,40 @@
 import React, { Component } from "react";
-import styles from "./usercard.module.css";
-import {createReqParams, notify} from "../../common";
-import Button from "../Button";
+import styles from "./issuecard.module.css";
+import {createReqParams, formatDate, notify, STATE_COLORS} from "../../common";
 
 function CardHeader (props) {
     const {data} = props;
     var style = {
-        backgroundImage: 'url(' + (data.avatar_url || '') + ')',
+        backgroundImage: 'url(' + (data.user.avatar_url || '') + ')',
     };
     return (
         <header className={styles.cardHeader}>
-            <a href={(data.html_url) || '#'} target={"_blank"} rel={"noreferrer"} className={styles.userAvatarImage} style={{
+            <a href={(data.user.html_url) || '#'} target={"_blank"} rel={"noreferrer"} className={styles.userAvatarImage} style={{
                 ...style,
                 fontSize: 0}}>{data.login || ''}</a>
             <div className={styles.cardHeaderContent}>
-                <h4 className={styles.cardHeaderTitle}><a className={styles.cardHeaderTitleAnchor} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>{data.login || ''}</a></h4>
-                <p className={styles.cardDate}><a className={styles.cardHeaderTitleAnchor} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>{data.html_url || ''}</a></p>
-                {!props.showDetails ?
-                    <Button><span onClick={props.onButtonClick}
-                                  className={styles.cardHeaderBtn}>{props.loading ? 'Loading...' : 'Read More'}</span></Button>
-                    :
-                    <Button><a href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>View on Github</a></Button>
-                }
+                <h4 className={styles.cardHeaderTitle}><a className={styles.cardHeaderTitleAnchor} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>#{data.number} <span style={{fontWeight: 400, marginLeft: 7}}>{data.title}</span></a> </h4>
+                <div style={{display: "flex"}}>
+                    <label className={styles.issueState} style={{backgroundColor: STATE_COLORS[data.state]}}>
+                        <svg height="16" className="octicon octicon-git-pull-request" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                            <path fillRule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" fill="#FFFFFF"></path>
+                        </svg>
+                        {data.state.toUpperCase()}
+                    </label>
+                    <label className={styles.commentCount}>
+                        <svg className="octicon octicon-git-commit d-none d-md-inline-block" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+                            <path fillRule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"></path>
+                        </svg>
+                        {data.comments} Comments
+                    </label>
+                </div>
+                <p style={{marginBottom: 0}}><a className={styles.cardHeaderTitleAnchor} href={data.user.html_url || '#'} style={{fontWeight: 700}} target={"_blank"} rel={"noreferrer"}>{data.user.login}</a> created on {formatDate(new Date(data.created_at))}</p>
             </div>
         </header>
     )
 }
 
-class UserCard extends Component {
+class IssueCard extends Component {
     state = {
         showDetails: false,
         userInfo: null,
@@ -74,9 +81,23 @@ class UserCard extends Component {
         const {data} = this.props;
         return (
             <div className={styles.card}>
-                <div className={styles.userCard}>
-                    <CardHeader data={data} onButtonClick={e=>{this.loadMoreInfo(data.url)}} showDetails={this.state.showDetails} loading={this.state.loading} />
-
+                <div className={styles.issueCard}>
+                    <CardHeader data={data} onButtonClick={e=>{this.loadMoreInfo(data.repository_url)}} showDetails={this.state.showDetails} loading={this.state.loading} />
+                    <div className={styles.cardFooter}>
+                        <div className={styles.cardFooterInfo}>
+                            <div className={styles.cardContent}>
+                                <p className={styles.cardDate}><a className={styles.cardHeaderTitleAnchor} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>{data.body || ''}</a></p>
+                                <a className={styles.cardHeaderBtn} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>View on Github</a>
+                                <div className={styles.cardContentUsername}>{this.state.userInfo && this.state.userInfo.name}</div>
+                                <div className={styles.cardContentBio}>{this.state.userInfo && this.state.userInfo.bio}</div>
+                                {this.state.userInfo && this.state.userInfo.email ? <div className={styles.cardContentBio}>Email: <strong>{this.state.userInfo && this.state.userInfo.email}</strong></div> : ''}
+                                {this.state.userInfo && this.state.userInfo.company ? <div className={styles.cardContentBio}>Company: <strong>{this.state.userInfo && this.state.userInfo.company}</strong></div> : ''}
+                                {this.state.userInfo && this.state.userInfo.blog ? <div className={styles.cardContentBio}>Blog: <strong>{this.state.userInfo && this.state.userInfo.blog}</strong></div> : ''}
+                                {this.state.userInfo && this.state.userInfo.location ? <div className={styles.cardContentBio}>Location: <strong>{this.state.userInfo && this.state.userInfo.location}</strong></div> : ''}
+                                {this.state.userInfo && this.state.userInfo.twitter_username ? <div className={styles.cardContentBio}>Twitter: <strong>{this.state.userInfo && this.state.userInfo.twitter_username}</strong></div> : ''}
+                            </div>
+                        </div>
+                    </div>
                     <div className={styles.cardLoadMoreContent + " " + (this.state.showDetails ? styles.cardLoadMoreContentActive : '')}>
                         <div className={styles.cardFooter}>
                             <div className={styles.cardFooterInfo}>
@@ -107,16 +128,6 @@ class UserCard extends Component {
                                 </div>
                                 <div className={styles.label}>Repositories</div>
                             </div>
-
-                        </div>
-                        <div className={styles.cardContent}>
-                            <div className={styles.cardContentUsername}>{this.state.userInfo && this.state.userInfo.name}</div>
-                            <div className={styles.cardContentBio}>{this.state.userInfo && this.state.userInfo.bio}</div>
-                            {this.state.userInfo && this.state.userInfo.email ? <div className={styles.cardContentBio}>Email: <strong>{this.state.userInfo && this.state.userInfo.email}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.company ? <div className={styles.cardContentBio}>Company: <strong>{this.state.userInfo && this.state.userInfo.company}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.blog ? <div className={styles.cardContentBio}>Blog: <strong>{this.state.userInfo && this.state.userInfo.blog}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.location ? <div className={styles.cardContentBio}>Location: <strong>{this.state.userInfo && this.state.userInfo.location}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.twitter_username ? <div className={styles.cardContentBio}>Twitter: <strong>{this.state.userInfo && this.state.userInfo.twitter_username}</strong></div> : ''}
                         </div>
                     </div>
                 </div>
@@ -125,4 +136,4 @@ class UserCard extends Component {
     }
 }
 
-export default UserCard;
+export default IssueCard;

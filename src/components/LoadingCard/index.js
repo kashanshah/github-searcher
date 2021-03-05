@@ -18,9 +18,9 @@ function CardHeader (props) {
 
 function LoadingCard (props) {
     return (
-        <article className={styles.repositoryCard}>
+        <div className={styles.repositoryCard}>
             <CardHeader />
-        </article>
+        </div>
     )
 }
 

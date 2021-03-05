@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import _ from "lodash";
-import {createReqParams, notify, SEARCH_URL} from "../../common";
+import {createReqParams, isAnHourAgo, notify, SEARCH_TYPES, SEARCH_URL} from "../../common";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from "./searchpage.module.css";
 import axios from "axios";
 import Select from "../../components/Select";
-import {addSearchResults, flushSearchResults, switchLoading} from "../../actions/CommonActions";
+import {addSearchResults, switchLoading} from "../../actions/CommonActions";
 import UserCard from "../../components/UserCard";
 import RepositoryCard from "../../components/RepositoryCard";
 import LoadingCard from "../../components/LoadingCard";
+import IssueCard from "../../components/IssueCard";
+import AppTitle from "../../components/AppTitle";
 
 class SearchPage extends React.Component {
 
@@ -20,7 +22,7 @@ class SearchPage extends React.Component {
         per_page: 30,
         total_count: 0,
         show_total: false,
-        searchType: {value: 'users', label: 'Users'}
+        searchType: SEARCH_TYPES[0]
     }
 
     componentDidMount() {
@@ -46,7 +48,9 @@ class SearchPage extends React.Component {
             }
             const q = this.state.query;
             const searchType = this.state.searchType.value;
-            if(this.props.searchResults[searchType] && this.props.searchResults[searchType][q] && this.state.page === 1){
+            const per_page = this.state.per_page;
+            const page = this.state.page;
+            if(this.state.page === 1 && this.props.searchResults[searchType] && this.props.searchResults[searchType][q] && !isAnHourAgo(this.props.searchResults[searchType][q].searchedAt)){
                 this.setState({
                     page: this.state.page + 1,
                     items: this.props.searchResults[searchType][q].items,
@@ -59,13 +63,17 @@ class SearchPage extends React.Component {
                 this.setState({
                     show_total: false
                 });
-                createReqParams(SEARCH_URL + '/' + searchType, {q: q, page: this.state.page, per_page: this.state.per_page}, 'GET', this.cancelToken.token)
+                createReqParams(SEARCH_URL + '/' + searchType, {q: q, page: page, per_page: per_page}, 'GET', this.cancelToken.token)
                     .then(response => {
                         if(response && response.data){
                             const data = response.data;
                             if(response.data.items){
-                                const searchResult = {};
-                                searchResult['' + q] = data;
+                                const searchResult = {
+                                    [q]: {
+                                        ...data,
+                                        searchedAt: new Date()
+                                    }
+                                };
                                 if(this.state.page === 1) {
                                     this.props.addSearchResults(searchResult, searchType);
                                 }
@@ -125,19 +133,7 @@ class SearchPage extends React.Component {
             <>
                 <div className={styles.searchpage + " " + (this.state.query.length >= 3 ? styles.searchpageActive : '')}>
                     <div className={styles.searchpageFieldWrap + " " + (this.state.query.length >= 3 ? styles.searchpageFieldWrapActive : '')}>
-                        <div className={styles.searchpageFieldDiv}>
-                            <div className={styles.searchpageFieldIcon}>
-                                <svg version="1.1" viewBox="0 0 16 16"
-                                     className="octicon octicon-mark-github" aria-hidden="true">
-                                    <path fillRule="evenodd"
-                                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h2 className={styles.searchpageFieldHeading}>Github Searcher</h2>
-                                <h3 className={styles.searchpageFieldText}>Search users or repositories below</h3>
-                            </div>
-                        </div>
+                        <AppTitle />
                         <div className={styles.searchboxDiv}>
                             <input
                                 className={styles.searchboxInput}
@@ -154,11 +150,7 @@ class SearchPage extends React.Component {
                                 name="searchType"
                                 id="searchType"
                                 styles
-                                options={[
-                                    {value: 'users', label: 'Users'},
-                                    {value: 'repositories', label: 'Repositories'},
-                                    {value: 'issues', label: 'Issues'}
-                                ]}
+                                options={SEARCH_TYPES}
                                 value={this.state.searchType}
                                 onChange={e => {
                                     this.resetResults();
@@ -195,7 +187,7 @@ class SearchPage extends React.Component {
                                     </div>
                                 }
                             >
-                                <div className={"c_row"}>
+                                <div className={"c_row " + (this.state.searchType.value === 'issues' ? styles.issueSearchRow : '')}>
                                     {
                                         this.state.items ? this.state.items.map((e, index) => {
                                             switch (this.state.searchType.value) {
@@ -212,7 +204,11 @@ class SearchPage extends React.Component {
                                                         </div>
                                                     )
                                                 case "issues":
-                                                    return <div className={styles.resultsItem}><UserCard key={e.id+index} /></div>
+                                                    return (
+                                                        <div className={styles.resultsItem} key={e.id+index}>
+                                                            <IssueCard data={e} />
+                                                        </div>
+                                                    )
                                                 default :
                                                     return ''
                                             }
@@ -222,9 +218,6 @@ class SearchPage extends React.Component {
                             </InfiniteScroll>
                             :
                             ''}
-{/*
-                    <span onClick={this.props.flushSearchResults}>Empty Cached Results</span>
-*/}
                 </div>
             </>
         )
@@ -238,4 +231,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {addSearchResults, flushSearchResults, switchLoading})(SearchPage);
+export default connect(mapStateToProps, {addSearchResults, switchLoading})(SearchPage);

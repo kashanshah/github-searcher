@@ -26,7 +26,6 @@ export const CommonReducer = (state = INITIAL_STATE, action) => {
                 },
             }
         case FLUSH_SEARCH_RESULTS:
-            alert();
             return {
                 ...state,
                 searchResults: [],

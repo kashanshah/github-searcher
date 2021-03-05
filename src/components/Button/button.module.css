@@ -1,0 +1,24 @@
+.button {
+    cursor: pointer;
+    background: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #333333;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.25s;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.button a,
+.button span{
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    height: 100%;
+    padding: 6px 10px;
+}

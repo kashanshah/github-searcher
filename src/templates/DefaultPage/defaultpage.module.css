@@ -1,0 +1,36 @@
+.defaultpage {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0 auto;
+    max-width: 100%;
+    transition: .5s;
+    padding-top: 250px;
+}
+
+.defaultpageFieldWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all .5s ease-in;
+    width: 500px;
+    max-width: calc( 100% - 60px );
+    padding: 60px 0;
+}
+
+@media (max-width: 576px) {
+    .defaultpage {
+        padding: 30px 0;
+    }
+    .defaultpageFieldWrap {
+        position: static;
+        padding: 0 15px;
+        transform: none;
+        max-width: 100%;
+    }
+}
