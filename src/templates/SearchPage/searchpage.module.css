@@ -45,19 +45,24 @@
 }
 .searchboxInput{
     padding: 8px;
-    width: calc( 70% - 15px );
-    margin-right: 15px;
-    border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 .searchboxInput:active,
 .searchboxInput:focus {
-    outline: 1px solid #2684FF;
+    outline: none;
     border-color: transparent;
+}
+
+.inputWrapper {
+    border: 1px solid #ccc;
+    width: calc( 70% - 15px );
+    margin-right: 15px;
 }
 
 .searchboxSelect {
     width: 30%;
-    border: 1px solid #ccc;
 }
 
 .resultsItem {

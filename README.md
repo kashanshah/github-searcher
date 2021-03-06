@@ -1,4 +1,4 @@
-# [Github Searcher](https://test.kashanshah.com): `Coding Task:`
+# [Github Searcher](https://test.kashanshah.com): `Coding Task`
 
 ## Overview
 
@@ -12,9 +12,9 @@ The project's is also deployed at this link for viewing purpose: [test.kashansha
 
 ## Task Details:
 
-Even though the requirements may be done with a single route, but since react router was a requirement, therefore, using [React Router Dom](https://github.com/ReactTraining/react-router) I have created 2 routes:
-1. `/`: Default route 
-1. `/search`: Search Page route
+The screens provided were of a single page application, but since react router was a requirement, therefore, using [React Router Dom](https://github.com/ReactTraining/react-router) I have created 2 routes:
+1. [`/`](https://test.kashanshah.com/): Default route 
+1. [`/search`](https://test.kashanshah.com/search): Search Page route
 
 On search page, there are two inputs, i.e. search field, to enter the search keyword; and the dropdown where user can pick "User", "Repository" or "Issues" to define the entities that he want to search.
 

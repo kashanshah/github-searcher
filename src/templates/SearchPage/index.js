@@ -145,16 +145,18 @@ class SearchPage extends React.Component {
                     <div className={styles.searchpageFieldWrap + " " + (this.state.query.length >= 3 ? styles.searchpageFieldWrapActive : '')}>
                         <AppTitle />
                         <div className={styles.searchboxDiv}>
-                            <input
-                                className={styles.searchboxInput}
-                                type={"text"}
-                                placeholder={"Start typing to search .."}
-                                value={this.state.query}
-                                onChange={e => {
-                                    this.setState({query: e.target.value});
-                                    this.fetchData();
-                                }}
-                            />
+                            <div className={styles.inputWrapper}>
+                                <input
+                                    className={styles.searchboxInput}
+                                    type={"text"}
+                                    placeholder={"Start typing to search .."}
+                                    value={this.state.query}
+                                    onChange={e => {
+                                        this.setState({query: e.target.value});
+                                        this.fetchData();
+                                    }}
+                                />
+                            </div>
                             <Select
                                 className={styles.searchboxSelect}
                                 name="entityType"
