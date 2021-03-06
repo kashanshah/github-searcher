@@ -45,6 +45,15 @@ h1, h2, h3, h4, h5, h6, p{
   padding-top: 30px;
 }
 
+input {
+  border-radius: 0;
+}
+
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+
 @media (max-width: 576px) {
   .c_container {
     padding-left: 7px;
