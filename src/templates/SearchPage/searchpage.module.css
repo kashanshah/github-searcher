@@ -81,9 +81,6 @@
     .resultsItem {
         width: 50%;
     }
-    .searchpageFieldWrapActive {
-        left: 30px;
-    }
 }
 
 @media (max-width: 576px) {
