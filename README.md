@@ -6,9 +6,13 @@ Github Searcher is a simple single page application built with [React JS](https:
 
 The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Production Link:
+
 The project's is also deployed at this link for viewing purpose: [test.kashanshah.com](https://test.kashanshah.com)
 
-The project is using [React Router](https://github.com/ReactTraining/react-router) for routings. The application has only 2 routes:
+## Task Details:
+
+Even though the requirements may be done with a single route, but since react router was a requirement, therefore, using [React Router Dom](https://github.com/ReactTraining/react-router) I have created 2 routes:
 1. `/`: Default route 
 1. `/search`: Search Page route 
 
@@ -35,3 +39,10 @@ Runs the app in the development mode.\
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
+
+### Other Links
+
+* [www.kashanshah.com](https://www.kashanshah.com)
+* [www.greenlightlabs.tech](https://www.greenlightlabs.tech)
+* [neom-react.trafficdemos.com](http://neom-react.trafficdemos.com/)
+* *LinkedIn:* [ https://www.linkedin.com/in/kashanshah/](https://www.linkedin.com/in/kashanshah/)

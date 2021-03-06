@@ -1,16 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import styles from "./defaultpage.module.css";
 import {flushSearchResults, switchLoading} from "../../actions/CommonActions";
 import AppTitle from "../../components/AppTitle";
-import {Link} from "react-router-dom";
 import {SEARCH_PAGE} from "../../common";
 import Button from "../../components/Button";
 
 class DefaultPage extends React.Component {
-
-    state = {
-    }
 
     componentDidMount() {
         this.props.flushSearchResults();
@@ -22,8 +19,13 @@ class DefaultPage extends React.Component {
             <>
                 <div className={styles.defaultpage}>
                     <div className={styles.defaultpageFieldWrap}>
-                        <AppTitle text={"Search users or repositories"} />
-                        <Button><Link to={SEARCH_PAGE} >Click here to begin</Link></Button>
+                        <AppTitle text={"Search users or repositories"}/>
+                        {
+                            this.props.isLoading ?
+                                ''
+                                :
+                                <Button><Link to={SEARCH_PAGE}>Click here to begin</Link></Button>
+                        }
                     </div>
                 </div>
             </>
@@ -34,7 +36,6 @@ class DefaultPage extends React.Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.common.isLoading,
-        searchResults: state.common.searchResults,
     }
 };
 
