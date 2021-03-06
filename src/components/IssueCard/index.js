@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./issuecard.module.css";
-import {createReqParams, formatDate, notify, GIT_STATE_COLORS} from "../../common";
+import {createReqParams, formatDate, notify, GIT_STATE_COLORS, DEFAULT_ERROR_MSG} from "../../common";
 
 function CardHeader (props) {
     const {data} = props;
@@ -63,15 +63,15 @@ class IssueCard extends Component {
                             notify(response.data.message);
                         }
                         else{
-                            notify('An error occured. Please try again later');
+                            notify(DEFAULT_ERROR_MSG);
                         }
                     }
                     else{
-                        notify('An error occured. Please try again later');
+                        notify(DEFAULT_ERROR_MSG);
                     }
                 })
                 .catch(e=> {
-                    notify('An error occured. Please try again later');
+                    notify(DEFAULT_ERROR_MSG);
                     console.warn(e);
                 });
         }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./usercard.module.css";
-import {createReqParams, notify} from "../../common";
+import {createReqParams, DEFAULT_ERROR_MSG, notify} from "../../common";
 import Button from "../Button";
 
 function CardHeader (props) {
@@ -56,15 +56,15 @@ class UserCard extends Component {
                             notify(response.data.message);
                         }
                         else{
-                            notify('An error occured. Please try again later');
+                            notify(DEFAULT_ERROR_MSG);
                         }
                     }
                     else{
-                        notify('An error occured. Please try again later');
+                        notify(DEFAULT_ERROR_MSG);
                     }
                 })
                 .catch(e=> {
-                    notify('An error occured. Please try again later');
+                    notify(DEFAULT_ERROR_MSG);
                     console.warn(e);
                 });
         }

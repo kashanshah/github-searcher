@@ -14,7 +14,7 @@ The project's is also deployed at this link for viewing purpose: [test.kashansha
 
 Even though the requirements may be done with a single route, but since react router was a requirement, therefore, using [React Router Dom](https://github.com/ReactTraining/react-router) I have created 2 routes:
 1. `/`: Default route 
-1. `/search`: Search Page route 
+1. `/search`: Search Page route
 
 On search page, there are two inputs, i.e. search field, to enter the search keyword; and the dropdown where user can pick "User", "Repository" or "Issues" to define the entities that he want to search.
 
@@ -27,6 +27,8 @@ For dropdown, [React Select](https://react-select.com/) has been used. While for
 The first 30 results against each searched keyword are also stored in redux store, through [redux-persist](https://www.npmjs.com/package/redux-persist). The cached results are flushed when the default route `/` is mounted. 
 
 Before calling the API, the [application first checks](./src/templates/SearchPage/index.js#L53) the redux store for the results against the typed keyword. If the result is present, the application checks if the cached data is not older than an hour. If the data is not an hour older, it displays the data from redux store, otherwise a new API call is executed to get refreshed data.
+
+As mentioned in the [Github Documentation](https://docs.github.com/en/rest/reference/search#rate-limit), it allows **10 requests per minute** while searching for any keyword. Therefore, whenever the API calls exceeds than the allowed number, it displays the error and a **Retry** button appears so that the user may wait and retry again to continue the search.
 
 ## Available Scripts
 

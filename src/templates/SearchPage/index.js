@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import _ from "lodash";
-import {createReqParams, isAnHourAgo, notify, ENTITY_TYPES, SEARCH_URL} from "../../common";
+import {createReqParams, isAnHourAgo, notify, ENTITY_TYPES, SEARCH_URL, DEFAULT_ERROR_MSG} from "../../common";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from "./searchpage.module.css";
 import axios from "axios";
@@ -12,6 +12,7 @@ import RepositoryCard from "../../components/RepositoryCard";
 import LoadingCard from "../../components/LoadingCard";
 import IssueCard from "../../components/IssueCard";
 import AppTitle from "../../components/AppTitle";
+import Button from "../../components/Button";
 
 class SearchPage extends React.Component {
 
@@ -22,6 +23,7 @@ class SearchPage extends React.Component {
         per_page: 30,
         total_count: 0,
         show_total: false,
+        show_retry: false,
         entityType: ENTITY_TYPES[0]
     }
 
@@ -86,15 +88,23 @@ class SearchPage extends React.Component {
                                 this.props.switchLoading(false);
                             }
                             else if(response.data.message){
+                                console.log("HEREH", this.state.items.length)
                                 notify(response.data.message);
+                                this.setState({
+                                    total_count: this.state.items.length,
+                                    show_total: false,
+                                    show_retry: true
+                                });
+                                this.props.switchLoading(false);
                             }
                             else{
-                                notify('An error occured. Please try again later');
+                                notify(DEFAULT_ERROR_MSG);
+                                this.props.switchLoading(false);
                             }
                         }
                     })
                     .catch(e=> {
-                        notify('An error occured. Please try again later');
+                        notify(DEFAULT_ERROR_MSG);
                         this.props.switchLoading(false);
                         console.warn(e);
                     });
@@ -182,9 +192,20 @@ class SearchPage extends React.Component {
                                 hasMore={(this.state.items.length < this.state.total_count)}
                                 loader={this.showLoading()}
                                 endMessage={
-                                    <div style={{ padding: '30px 0', textAlign: 'center' }}>
-                                        <b>That's all!</b>
-                                    </div>
+                                    this.state.show_retry ?
+                                        <div style={{ padding: '30px 0', textAlign: 'center' }}>
+                                            <Button><span onClick={e=> {
+                                                this.setState({
+                                                    total_count: this.state.total_count + 1,
+                                                    show_retry: false
+                                                });
+                                                this.fetchData(true);
+                                            }}>Retry</span></Button>
+                                        </div>
+                                        :
+                                        <div style={{ padding: '30px 0', textAlign: 'center' }}>
+                                            <b>That's all!</b>
+                                        </div>
                                 }
                             >
                                 <div className={"c_row " + (this.state.entityType.value === 'issues' ? styles.issueSearchRow : '')}>
@@ -218,6 +239,7 @@ class SearchPage extends React.Component {
                             </InfiniteScroll>
                             :
                             ''}
+
                 </div>
             </>
         )

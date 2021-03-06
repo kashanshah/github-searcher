@@ -49,8 +49,8 @@ input {
   border-radius: 0;
   box-shadow: none;
   -webkit-appearance: none;
+  min-height: 40px;
 }
-
 
 @media (max-width: 576px) {
   .c_container {
