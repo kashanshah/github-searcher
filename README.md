@@ -46,5 +46,5 @@ Builds the app for production to the `build` folder.\
 
 * [www.kashanshah.com](https://www.kashanshah.com)
 * [www.greenlightlabs.tech](https://www.greenlightlabs.tech)
-* [neom-react.trafficdemos.com](http://neom-react.trafficdemos.com/)
+* [neom-react.trafficdemos.com/register](http://neom-react.trafficdemos.com/register/)
 * *LinkedIn:* [ https://www.linkedin.com/in/kashanshah/](https://www.linkedin.com/in/kashanshah/)
