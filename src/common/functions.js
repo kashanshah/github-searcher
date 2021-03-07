@@ -55,5 +55,5 @@ export const formatDate = (inputDate = new Date()) => {
 export const isAnHourAgo= (date) => {
     const hour= 1000 * 60 * 60;
     const hourago = new Date(Date.now() - hour);
-    return date < hourago;
+    return (new Date(date) < hourago);
 }
