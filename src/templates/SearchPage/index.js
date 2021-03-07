@@ -52,7 +52,6 @@ class SearchPage extends React.Component {
             const entityType = this.state.entityType.value;
             const per_page = this.state.per_page;
             const page = this.state.page;
-            console.log(this.props.searchResults[entityType][q].searchedAt, isAnHourAgo(this.props.searchResults[entityType][q].searchedAt));
             if(this.state.page === 1 && this.props.searchResults[entityType] && this.props.searchResults[entityType][q] && !isAnHourAgo(this.props.searchResults[entityType][q].searchedAt)){
                 this.setState({
                     page: this.state.page + 1,
