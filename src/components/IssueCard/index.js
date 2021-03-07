@@ -88,17 +88,10 @@ class IssueCard extends Component {
                             <div className={styles.cardContent}>
                                 <p className={styles.cardDate}><a className={styles.cardHeaderTitleAnchor} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>{data.body || ''}</a></p>
                                 <a className={styles.cardHeaderBtn} href={data.html_url || '#'} target={"_blank"} rel={"noreferrer"}>View on Github</a>
-                                <div className={styles.cardContentUsername}>{this.state.userInfo && this.state.userInfo.name}</div>
-                                <div className={styles.cardContentBio}>{this.state.userInfo && this.state.userInfo.bio}</div>
-                                {this.state.userInfo && this.state.userInfo.email ? <div className={styles.cardContentBio}>Email: <strong>{this.state.userInfo && this.state.userInfo.email}</strong></div> : ''}
-                                {this.state.userInfo && this.state.userInfo.company ? <div className={styles.cardContentBio}>Company: <strong>{this.state.userInfo && this.state.userInfo.company}</strong></div> : ''}
-                                {this.state.userInfo && this.state.userInfo.blog ? <div className={styles.cardContentBio}>Blog: <strong>{this.state.userInfo && this.state.userInfo.blog}</strong></div> : ''}
-                                {this.state.userInfo && this.state.userInfo.location ? <div className={styles.cardContentBio}>Location: <strong>{this.state.userInfo && this.state.userInfo.location}</strong></div> : ''}
-                                {this.state.userInfo && this.state.userInfo.twitter_username ? <div className={styles.cardContentBio}>Twitter: <strong>{this.state.userInfo && this.state.userInfo.twitter_username}</strong></div> : ''}
                             </div>
                         </div>
                     </div>
-                    <div className={styles.cardLoadMoreContent + " " + (this.state.showDetails ? styles.cardLoadMoreContentActive : '')}>
+                    <div className={styles.cardLoadMoreContent + " " + (this.state.showDetails && styles.cardLoadMoreContentActive)}>
                         <div className={styles.cardFooter}>
                             <div className={styles.cardFooterInfo}>
                                 <div style={{display: 'flex', alignItems: 'center'}}>

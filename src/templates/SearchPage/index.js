@@ -141,8 +141,8 @@ class SearchPage extends React.Component {
     render() {
         return (
             <>
-                <div className={styles.searchpage + " " + (this.state.query.length >= 3 ? styles.searchpageActive : '')}>
-                    <div className={styles.searchpageFieldWrap + " " + (this.state.query.length >= 3 ? styles.searchpageFieldWrapActive : '')}>
+                <div className={styles.searchpage + " " + (this.state.query.length >= 3 && styles.searchpageActive)}>
+                    <div className={styles.searchpageFieldWrap + " " + (this.state.query.length >= 3 && styles.searchpageFieldWrapActive)}>
                         <AppTitle />
                         <div className={styles.searchboxDiv}>
                             <div className={styles.inputWrapper}>
@@ -181,7 +181,7 @@ class SearchPage extends React.Component {
                 <div className={styles.searchResults + " c_container"}>
                     <div className={styles.totalCount + " c_row"}>
                         <div className="c_col">
-                            {this.state.show_total ? <>Total Results: <span className={styles.totalCountSpan}>{this.state.total_count && this.state.total_count}</span></> : '' }
+                            {this.state.show_total && <>Total Results: <span className={styles.totalCountSpan}>{this.state.total_count && this.state.total_count}</span></>}
                         </div>
                     </div>
                     {this.props.isLoading ?
@@ -210,9 +210,9 @@ class SearchPage extends React.Component {
                                         </div>
                                 }
                             >
-                                <div className={"c_row " + (this.state.entityType.value === 'issues' ? styles.issueSearchRow : '')}>
+                                <div className={"c_row " + (this.state.entityType.value === 'issues' && styles.issueSearchRow)}>
                                     {
-                                        this.state.items ? this.state.items.map((e, index) => {
+                                        this.state.items && this.state.items.map((e, index) => {
                                             switch (this.state.entityType.value) {
                                                 case "users":
                                                     return (
@@ -235,7 +235,7 @@ class SearchPage extends React.Component {
                                                 default :
                                                     return ''
                                             }
-                                        }) : ''
+                                        })
                                     }
                                 </div>
                             </InfiniteScroll>

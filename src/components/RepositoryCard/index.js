@@ -52,13 +52,12 @@ function CardBody (props) {
                 </div>
             </div>
             {
-                props.language ?
+                props.language && (
                     <div className={styles.languageInfo}>
                         <span className={styles.languageIcon} style={{backgroundColor: colors[props.language] ? colors[props.language].color : '#000'}}></span>
                         <a href={props.link + "/search?l=" + props.language} className={styles.cardStarCount} target={"_blank"} rel={"noreferrer"}>{props.language}</a>
                     </div>
-                    :
-                    ''
+                )
             }
             <Button>
                 <a href={props.link} target={"_blank"} rel={"noreferrer"}>Find out more</a>

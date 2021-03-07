@@ -77,7 +77,7 @@ class UserCard extends Component {
                 <div className={styles.userCard}>
                     <CardHeader data={data} onButtonClick={e=>{this.loadMoreInfo(data.url)}} showDetails={this.state.showDetails} loading={this.state.loading} />
 
-                    <div className={styles.cardLoadMoreContent + " " + (this.state.showDetails ? styles.cardLoadMoreContentActive : '')}>
+                    <div className={styles.cardLoadMoreContent + " " + (this.state.showDetails && styles.cardLoadMoreContentActive)}>
                         <div className={styles.cardFooter}>
                             <div className={styles.cardFooterInfo}>
                                 <div style={{display: 'flex', alignItems: 'center'}}>
@@ -112,11 +112,11 @@ class UserCard extends Component {
                         <div className={styles.cardContent}>
                             <div className={styles.cardContentUsername}>{this.state.userInfo && this.state.userInfo.name}</div>
                             <div className={styles.cardContentBio}>{this.state.userInfo && this.state.userInfo.bio}</div>
-                            {this.state.userInfo && this.state.userInfo.email ? <div className={styles.cardContentBio}>Email: <strong>{this.state.userInfo && this.state.userInfo.email}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.company ? <div className={styles.cardContentBio}>Company: <strong>{this.state.userInfo && this.state.userInfo.company}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.blog ? <div className={styles.cardContentBio}>Blog: <strong>{this.state.userInfo && this.state.userInfo.blog}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.location ? <div className={styles.cardContentBio}>Location: <strong>{this.state.userInfo && this.state.userInfo.location}</strong></div> : ''}
-                            {this.state.userInfo && this.state.userInfo.twitter_username ? <div className={styles.cardContentBio}>Twitter: <strong>{this.state.userInfo && this.state.userInfo.twitter_username}</strong></div> : ''}
+                            {this.state.userInfo && this.state.userInfo.email && <div className={styles.cardContentBio}>Email: <strong>{this.state.userInfo && this.state.userInfo.email}</strong></div>}
+                            {this.state.userInfo && this.state.userInfo.company && <div className={styles.cardContentBio}>Company: <strong>{this.state.userInfo && this.state.userInfo.company}</strong></div>}
+                            {this.state.userInfo && this.state.userInfo.blog && <div className={styles.cardContentBio}>Blog: <strong>{this.state.userInfo && this.state.userInfo.blog}</strong></div>}
+                            {this.state.userInfo && this.state.userInfo.location && <div className={styles.cardContentBio}>Location: <strong>{this.state.userInfo && this.state.userInfo.location}</strong></div>}
+                            {this.state.userInfo && this.state.userInfo.twitter_username && <div className={styles.cardContentBio}>Twitter: <strong>{this.state.userInfo && this.state.userInfo.twitter_username}</strong></div>}
                         </div>
                     </div>
                 </div>
